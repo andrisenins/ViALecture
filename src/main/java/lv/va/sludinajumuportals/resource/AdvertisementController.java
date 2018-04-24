@@ -25,7 +25,7 @@ public class AdvertisementController {
 
     @RequestMapping("/main")
     public String getUI(Map<String, Object> model) {
-
+        model.put("message", "Hello User!");
         return "main";
     }
 
