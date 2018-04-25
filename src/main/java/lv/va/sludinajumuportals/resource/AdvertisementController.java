@@ -1,6 +1,8 @@
 package lv.va.sludinajumuportals.resource;
 
 import lv.va.sludinajumuportals.domain.Response;
+import lv.va.sludinajumuportals.service.AdvertisementService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -10,6 +12,9 @@ import java.util.Map;
 
 @Controller
 public class AdvertisementController {
+
+    @Autowired
+    private AdvertisementService advertisementService;
 
     @GetMapping(value = "/")
     @ResponseBody
@@ -26,6 +31,7 @@ public class AdvertisementController {
     @RequestMapping("/main")
     public String getUI(Map<String, Object> model) {
         model.put("message", "Hello User!");
+        model.put("advertisement", advertisementService.getAdvertisement());
         return "main";
     }
 

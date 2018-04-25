@@ -7,6 +7,9 @@ public class Advertisement {
     String message;
     String author;
 
+    public Advertisement() {
+    }
+
     public Advertisement(Long id, String title, String message, String author) {
         this.id = id;
         this.title = title;
