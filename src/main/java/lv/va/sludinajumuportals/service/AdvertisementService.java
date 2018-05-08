@@ -28,7 +28,7 @@ public class AdvertisementService {
     public List<Advertisement> getAdvertisementListByAuthor(String author) {
         List<Advertisement> filteredByName = new ArrayList<>();
         for (Advertisement advertisement : hardcodedAdvertisementList) {
-            if(advertisement.getAuthor().equals(author)) {
+            if(advertisement.getAuthor().matches(author)) {
                 filteredByName.add(advertisement);
             }
         }

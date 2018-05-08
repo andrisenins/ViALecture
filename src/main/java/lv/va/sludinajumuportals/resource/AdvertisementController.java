@@ -1,10 +1,13 @@
 package lv.va.sludinajumuportals.resource;
 
+import lv.va.sludinajumuportals.domain.Advertisement;
 import lv.va.sludinajumuportals.domain.Response;
 import lv.va.sludinajumuportals.service.AdvertisementService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
@@ -34,5 +37,24 @@ public class AdvertisementController {
         model.put("advertisement", advertisementService.getAdvertisement());
         return "main";
     }
+
+    @GetMapping("/advertisements")
+    public String getAdvertisements(Map<String, Object> model) {
+        model.put("advertisementList", advertisementService.getAdvertisementListReverse());
+        return "advertisementui";
+    }
+
+    @RequestMapping("/advertisements/{author}")
+    public String getAdvertisementsByAuthor(Map<String, Object> model, @PathVariable(value = "author") String author) {
+        model.put("advertisementsList", advertisementService.getAdvertisementListByAuthor(author));
+        return "advertisementui";
+    }
+
+    @GetMapping("/createadvertisementform")
+    public String advertisementCreationForm(Model model) {
+        model.addAttribute("advertisement", new Advertisement());
+        return "createform";
+    }
+
 
 }
