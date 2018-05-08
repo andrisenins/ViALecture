@@ -1,7 +1,17 @@
 package lv.va.sludinajumuportals.domain;
 
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.Table;
+
+@Entity(name = "Advertisement")
+@Table(name = "advertisement")
 public class Advertisement {
 
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
     Long id;
     String title;
     String message;
