@@ -1,5 +1,6 @@
 package lv.va.sludinajumuportals.resource;
 
+import lv.va.sludinajumuportals.dao.AdvertisementRepository;
 import lv.va.sludinajumuportals.domain.Advertisement;
 import lv.va.sludinajumuportals.domain.Response;
 import lv.va.sludinajumuportals.service.AdvertisementService;
@@ -22,6 +23,9 @@ public class AdvertisementController {
 
     @Autowired
     private AdvertisementService advertisementService;
+
+    @Autowired
+    AdvertisementRepository advertisementRepository;
 
     @GetMapping(value = "/")
     @ResponseBody
@@ -59,6 +63,23 @@ public class AdvertisementController {
         model.addAttribute("advertisement", new Advertisement());
         return "createform";
     }
+
+    @GetMapping("/createadvertisementformdb")
+    public String advertisementCreationFormdb(Model model) {
+        model.addAttribute("advertisement", new Advertisement());
+        return "createformdb";
+    }
+
+    @PostMapping("/advertisementdb")
+    public String advertisementSubmitdb(Map<String, Object> model,
+                                      @ModelAttribute Advertisement advertisement) {
+        advertisementRepository.save(advertisement);
+        model.put("advertisement", advertisement);
+        return "result";
+
+    }
+
+
 
     @PostMapping("/advertisement")
     public String advertisementSubmit(Map<String, Object> model,
